@@ -113,18 +113,22 @@ class Instructor<C> {
     }
 
     const timestamp = new Date().toISOString()
+    const formattedArgs = args.map(arg =>
+      typeof arg === "string" ? arg : JSON.stringify(arg)
+    ).join(" ")
+
     switch (level) {
       case "debug":
-        console.debug(`[Instructor:DEBUG] ${timestamp}:`, ...args)
+        console.debug(`[Instructor:DEBUG] ${timestamp}: ${formattedArgs}`)
         break
       case "info":
-        console.info(`[Instructor:INFO] ${timestamp}:`, ...args)
+        console.info(`[Instructor:INFO] ${timestamp}: ${formattedArgs}`)
         break
       case "warn":
-        console.warn(`[Instructor:WARN] ${timestamp}:`, ...args)
+        console.warn(`[Instructor:WARN] ${timestamp}: ${formattedArgs}`)
         break
       case "error":
-        console.error(`[Instructor:ERROR] ${timestamp}:`, ...args)
+        console.error(`[Instructor:ERROR] ${timestamp}: ${formattedArgs}`)
         break
     }
   }
